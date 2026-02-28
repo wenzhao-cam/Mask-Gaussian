@@ -137,6 +137,17 @@ Please follow the LICENSE of [3D-GS](https://github.com/graphdeco-inria/gaussian
   </div>
 </section>
 
+## README update 2026-02-28
+```
+git submodule sync
+git submodule update --init --recursive
+```
+
+```
+pip install --no-build-isolation submodules/diff-gaussian-rasterization
+pip install --no-build-isolation submodules/mask-diff-gaussian-rasterization
+pip install --no-build-isolation submodules/simple-knn
+```
 ## Acknowledgement
 
 This project is built upon [3D-GS](https://github.com/graphdeco-inria/gaussian-splatting), [Compact-3DGS](https://github.com/maincold2/Compact-3DGS), and [LightGaussian](https://github.com/VITA-Group/LightGaussian). We thank all authors for their great work!

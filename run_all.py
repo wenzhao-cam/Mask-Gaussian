@@ -4,11 +4,11 @@ data_dir = './data/gs_datasets'
 save_dir = './output'
 
 subdirectories = [
-    "bicycle",  
+    # "bicycle",  
     # "bonsai",
     # "counter",  
     # "drjohnson",
-    # "flowers",
+    "flowers",
     # "garden",
     # "kitchen",  
     # "playroom",  
@@ -18,6 +18,22 @@ subdirectories = [
     # "treehill",  
     # "truck",
 ]
+
+# subdirectories = [
+#     # "bicycle",  
+#     # "bonsai",
+#     # "counter",  
+#     # "drjohnson",
+#     # "flowers",
+#     # "garden",
+#     # "kitchen",  
+#     # "playroom",  
+#     # "room",
+#     # "stump",  
+#     # "train", 
+#     # "treehill",  
+#     # "truck",
+# ]
 data_device = 'cuda'
 
 # Ours-α

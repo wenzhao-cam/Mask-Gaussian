@@ -137,6 +137,26 @@ Please follow the LICENSE of [3D-GS](https://github.com/graphdeco-inria/gaussian
   </div>
 </section>
 
+## README update 2026-02-28
+```
+git submodule sync
+git submodule update --init --recursive
+```
+
+```
+pip install --no-build-isolation submodules/diff-gaussian-rasterization
+pip install --no-build-isolation submodules/mask-diff-gaussian-rasterization
+pip install --no-build-isolation submodules/simple-knn
+```
+
+MipNeRF 360 (strict)
+- Scenes: bicycle, bonsai, counter, flowers, garden, kitchen, room, stump, treehill
+- Path: data/MipNeRF360/360_v2/<scene>/
+- Indoor (2× downsample): bonsai, counter, kitchen, room -> To satisfy the data structure of this project, need to rename the data folder "images_2" of the corresponding scenes to "images"
+- Outdoor (4× downsample): bicycle, flowers, garden, stump, treehill -> To satisfy the data structure of this project, need to rename the data folder "images_4" of the corresponding scenes to "images"
+- Split: every 8th image — indices 0, 8, 16, 24, ... test; rest train.
+
+
 ## Acknowledgement
 
 This project is built upon [3D-GS](https://github.com/graphdeco-inria/gaussian-splatting), [Compact-3DGS](https://github.com/maincold2/Compact-3DGS), and [LightGaussian](https://github.com/VITA-Group/LightGaussian). We thank all authors for their great work!

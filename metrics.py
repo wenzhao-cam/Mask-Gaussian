@@ -21,6 +21,16 @@ from tqdm import tqdm
 from utils.image_utils import psnr
 from argparse import ArgumentParser
 
+def gaussian_count_from_ply_header(ply_path: Path) -> int:
+    with open(ply_path, "rb") as f:
+        for line in f:
+            line = line.decode("ascii", errors="ignore").strip()
+            if line.startswith("element vertex"):
+                return int(line.split()[-1])
+            if line == "end_header":
+                break
+    raise ValueError(f"Could not find 'element vertex' in PLY header: {ply_path}")
+
 def readImages(renders_dir, gt_dir):
     renders = []
     gts = []
@@ -48,6 +58,18 @@ def evaluate(model_paths):
             per_view_dict[scene_dir] = {}
             full_dict_polytopeonly[scene_dir] = {}
             per_view_dict_polytopeonly[scene_dir] = {}
+
+            # read number of guassian / splats from point_cloud/iteration_30000/point_cloud.ply
+            ply_path = Path(scene_dir) / "point_cloud" / "iteration_30000" / "point_cloud.ply"
+            if ply_path.exists():
+                try:
+                    n_gaussians = gaussian_count_from_ply_header(ply_path)
+                    print(f"Gaussians/Splats: {n_gaussians}")
+                    # full_dict[scene_dir].update({"NUM_GAUSSIANS": n_gaussians})
+                except Exception as e:
+                    print(f"Gaussians/Splats: failed to read {ply_path} ({e})")
+            else:
+                print(f"Gaussians/Splats: {ply_path} not found")
 
             test_dir = Path(scene_dir) / "test"
 
@@ -80,7 +102,8 @@ def evaluate(model_paths):
 
                 full_dict[scene_dir][method].update({"SSIM": torch.tensor(ssims).mean().item(),
                                                         "PSNR": torch.tensor(psnrs).mean().item(),
-                                                        "LPIPS": torch.tensor(lpipss).mean().item()})
+                                                        "LPIPS": torch.tensor(lpipss).mean().item(),
+                                                        "NUM_GAUSSIANS": n_gaussians})
                 per_view_dict[scene_dir][method].update({"SSIM": {name: ssim for ssim, name in zip(torch.tensor(ssims).tolist(), image_names)},
                                                             "PSNR": {name: psnr for psnr, name in zip(torch.tensor(psnrs).tolist(), image_names)},
                                                             "LPIPS": {name: lp for lp, name in zip(torch.tensor(lpipss).tolist(), image_names)}})

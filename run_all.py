@@ -4,20 +4,36 @@ data_dir = './data/gs_datasets'
 save_dir = './output'
 
 subdirectories = [
-    "bicycle",  
-    "bonsai",
-    "counter",  
-    "drjohnson",
+    # "bicycle",  
+    # "bonsai",
+    # "counter",  
+    # "drjohnson",
     "flowers",
-    "garden",
-    "kitchen",  
-    "playroom",  
-    "room",
-    "stump",  
-    "train", 
-    "treehill",  
-    "truck",
+    # "garden",
+    # "kitchen",  
+    # "playroom",  
+    # "room",
+    # "stump",  
+    # "train", 
+    # "treehill",  
+    # "truck",
 ]
+
+# subdirectories = [
+#     # "bicycle",  
+#     # "bonsai",
+#     # "counter",  
+#     # "drjohnson",
+#     # "flowers",
+#     # "garden",
+#     # "kitchen",  
+#     # "playroom",  
+#     # "room",
+#     # "stump",  
+#     # "train", 
+#     # "treehill",  
+#     # "truck",
+# ]
 data_device = 'cuda'
 
 # Ours-α
@@ -26,14 +42,14 @@ data_device = 'cuda'
 # mask_until_iter = 20000
 
 # Ours-β
-lambda_mask = 0.0005
-mask_from_iter = 0
-mask_until_iter = 30000
-
-# Ours-γ
-# lambda_mask = 0.001
+# lambda_mask = 0.0005
 # mask_from_iter = 0
 # mask_until_iter = 30000
+
+# Ours-γ
+lambda_mask = 0.001
+mask_from_iter = 0
+mask_until_iter = 30000
 
 
 for d in subdirectories:
